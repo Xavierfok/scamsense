@@ -27,7 +27,7 @@ message ──► 1. Rule checker (rules.py) ───────────�
          2. Privacy redaction                        │
             │   card/phone numbers + email names     │
             ▼   are masked before leaving the device │
-         3. AI analysis (Llama 3.3 70B via Groq) ◄───┘  rule hits are sent as hints
+         3. AI analysis (Claude Opus 5.5) ◄────────┘  rule hits are sent as hints
             │   returns JSON: verdict, score, scam type,
             ▼   red flags + evidence, explanation, next steps
          4. Safety floor: if the rules found strong evidence,
@@ -40,9 +40,9 @@ message ──► 1. Rule checker (rules.py) ───────────�
 
 | Part | What's used | Role |
 |---|---|---|
-| Language model | `llama-3.3-70b-versatile` (Meta Llama 3.3, open weights) | Reads the message and explains the scam pattern |
-| API | [Groq](https://groq.com) free tier | Fast, free model hosting |
-| Output format | JSON mode (`response_format: json_object`) | Structured, validated results, never free text |
+| Language model | `claude-opus-5-5` (Anthropic Claude Opus 5.5, low effort) | Reads the message and explains the scam pattern |
+| API | [Claude API](https://platform.claude.com) (Anthropic Python SDK) | Model access; a refused request falls back to another Claude model automatically |
+| Output format | Structured outputs (`output_config.format` with a JSON schema) | Reply is guaranteed to match the schema |
 | Rule engine | Python `re` (regular expressions) | Offline checks, AI hints, safety floor |
 | UI | [Streamlit](https://streamlit.io) | Web interface |
 | Hosting | Streamlit Community Cloud | Free public demo, deployed from this GitHub repo |
@@ -61,7 +61,7 @@ cd scamsense
 python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env              # then paste your free key from https://console.groq.com/keys
+cp .env.example .env              # then paste your Anthropic API key from https://platform.claude.com
 streamlit run streamlit_app.py    # opens http://localhost:8501
 ```
 
@@ -70,7 +70,7 @@ No key? It still runs and uses the rule checker only (the result card says so).
 ### Deploy your own copy on Streamlit Community Cloud (free)
 
 1. Fork this repo, then at [share.streamlit.io](https://share.streamlit.io) click **Create app** → pick the repo, branch `main`, file `streamlit_app.py`.
-2. **Advanced settings → Secrets**: add `GROQ_API_KEY = "your-key"`.
+2. **Advanced settings → Secrets**: add `ANTHROPIC_API_KEY = "your-key"`.
 3. Deploy. It rebuilds automatically on every push.
 
 > Why not Hugging Face Spaces? Gradio/Docker Spaces now need a paid PRO plan, and this project sticks to free tools.
@@ -102,11 +102,11 @@ pytest -q
 
 ## Privacy
 
-Messages aren't stored or logged. Before the text goes to Groq, long numbers (cards, phones, accounts) and the name part of email addresses are masked. Please don't paste passwords or OTPs anyway.
+Messages aren't stored or logged. Before the text goes to the Claude API, long numbers (cards, phones, accounts) and the name part of email addresses are masked. Please don't paste passwords or OTPs anyway.
 
 ## Credits
 
-- [Meta Llama 3.3](https://www.llama.com/) model, served by [Groq](https://groq.com)
+- [Claude](https://www.anthropic.com/claude) by Anthropic, via the Claude API
 - [Streamlit](https://streamlit.io) UI framework and Community Cloud hosting
 - Scam patterns informed by public advice from [ScamShield (Singapore)](https://www.scamshield.gov.sg/)
 - Built with help from Claude Code (AI coding assistant). See [CONTRIBUTION.md](CONTRIBUTION.md)

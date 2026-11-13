@@ -65,7 +65,7 @@ def test_redact_masks_numbers_and_emails_but_keeps_links():
 
 
 def test_rules_only_mode_without_key(monkeypatch):
-    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     res = analyzer.check_message("Your account will be suspended, send the OTP now")
     assert res["mode"] == "rules"
     assert res["verdict"] in ("Suspicious", "Likely scam")

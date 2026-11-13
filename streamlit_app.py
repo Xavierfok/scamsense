@@ -1,7 +1,7 @@
 """ScamSense: paste a suspicious message, find out if it's a scam.
 
 Run locally:   streamlit run streamlit_app.py
-AI key:        GROQ_API_KEY in .streamlit/secrets.toml, a .env file, or an
+AI key:        ANTHROPIC_API_KEY in .streamlit/secrets.toml, a .env file, or an
                environment variable. Without it the app uses the rule checker only.
 """
 
@@ -17,8 +17,8 @@ st.set_page_config(page_title="ScamSense: Is this message a scam?", page_icon="ð
 
 # --- API key: Streamlit secrets (cloud) > .env file (local) > environment ---
 try:
-    if "GROQ_API_KEY" in st.secrets:
-        os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+    if "ANTHROPIC_API_KEY" in st.secrets:
+        os.environ["ANTHROPIC_API_KEY"] = st.secrets["ANTHROPIC_API_KEY"]
 except Exception:
     pass  # no secrets.toml locally; that's fine
 if os.path.exists(".env"):

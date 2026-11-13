@@ -17,7 +17,7 @@
 
 ## What I learned
 
-- [e.g. how to call an LLM API and get reliable JSON back]
+- [e.g. how to call the Claude API and get reliable JSON back with structured outputs]
 - [e.g. what prompt injection is, and why rules are a useful backstop for AI]
 - [e.g. how regular expressions work, and the false positives I had to fix, like an email address being counted as a link]
 - [e.g. deploying to Streamlit Community Cloud and keeping an API key secret; Hugging Face turned out to charge for Gradio Spaces, so I rebuilt the UI in Streamlit]
