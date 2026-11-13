@@ -4,3 +4,4 @@ __pycache__/
 .pytest_cache/
 flagged/
 .gradio/
+.streamlit/secrets.toml

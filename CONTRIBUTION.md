@@ -9,7 +9,7 @@
 - **Privacy redaction:** numbers and email names are masked before any text goes to the AI
 - **Prompt design:** a system prompt that treats the message as untrusted and forces structured JSON output
 - **Validation + tests:** the AI's output is checked and cleaned; 12 pytest tests cover the rules, redaction, rules-only mode and the safety floor
-- **Gradio interface** with examples, and deployment to Hugging Face Spaces
+- **Streamlit interface** with one-click examples, deployed free on Streamlit Community Cloud
 
 ## AI-assisted development tools I used
 
@@ -20,7 +20,7 @@
 - [e.g. how to call an LLM API and get reliable JSON back]
 - [e.g. what prompt injection is, and why rules are a useful backstop for AI]
 - [e.g. how regular expressions work, and the false positives I had to fix, like an email address being counted as a link]
-- [e.g. deploying to Hugging Face Spaces and keeping an API key secret]
+- [e.g. deploying to Streamlit Community Cloud and keeping an API key secret; Hugging Face turned out to charge for Gradio Spaces, so I rebuilt the UI in Streamlit]
 
 ## Challenges
 

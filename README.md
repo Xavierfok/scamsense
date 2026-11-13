@@ -1,15 +1,3 @@
----
-title: ScamSense
-emoji: 🛡️
-colorFrom: red
-colorTo: yellow
-sdk: gradio
-app_file: app.py
-pinned: false
-license: mit
-short_description: Paste a suspicious message, find out if it's a scam
----
-
 # 🛡️ ScamSense: Is this message a scam?
 
 **ScamSense** is a free AI tool that checks suspicious SMS, WhatsApp messages, emails and DMs. Paste a message and it tells you:
@@ -21,7 +9,7 @@ short_description: Paste a suspicious message, find out if it's a scam
 
 Built for the *Build Your First AI App 2026* hackathon (category: **AI for Social Good**).
 
-![A fake SingPost delivery-fee SMS flagged as Likely scam](screenshots/1-delivery-scam.jpg)
+![A fake DBS bank alert flagged as Likely scam](screenshots/1-bank-scam.jpg)
 
 ![An ordinary lunch message marked Probably safe](screenshots/2-safe-message.jpg)
 
@@ -56,34 +44,36 @@ message ──► 1. Rule checker (rules.py) ───────────�
 | API | [Groq](https://groq.com) free tier | Fast, free model hosting |
 | Output format | JSON mode (`response_format: json_object`) | Structured, validated results, never free text |
 | Rule engine | Python `re` (regular expressions) | Offline checks, AI hints, safety floor |
-| UI | [Gradio](https://gradio.app) | Web interface |
-| Hosting | Hugging Face Spaces | Free public demo |
+| UI | [Streamlit](https://streamlit.io) | Web interface |
+| Hosting | Streamlit Community Cloud | Free public demo, deployed from this GitHub repo |
 
 The AI's answer is validated: unknown verdicts, non-numeric scores or malformed red flags are replaced with safe defaults, so a bad model reply can never crash the app.
 
 ## Try it
 
-**Live demo:** _add your Hugging Face Space link here_
+**Live demo:** _LIVE_URL_
 
 ### Run it on your own computer
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Xavierfok/scamsense.git
 cd scamsense
 python -m venv .venv
 # Windows: .venv\Scripts\activate    macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env        # then paste your free key from https://console.groq.com/keys
-python app.py               # open http://127.0.0.1:7860
+cp .env.example .env              # then paste your free key from https://console.groq.com/keys
+streamlit run streamlit_app.py    # opens http://localhost:8501
 ```
 
 No key? It still runs and uses the rule checker only (the result card says so).
 
-### Deploy your own copy on Hugging Face Spaces (free)
+### Deploy your own copy on Streamlit Community Cloud (free)
 
-1. Create a new Space → SDK **Gradio** → upload `app.py`, `analyzer.py`, `rules.py`, `requirements.txt`, `README.md`.
-2. Space **Settings → Variables and secrets → New secret**: name `GROQ_API_KEY`, value = your key.
-3. The Space rebuilds and goes live.
+1. Fork this repo, then at [share.streamlit.io](https://share.streamlit.io) click **Create app** → pick the repo, branch `main`, file `streamlit_app.py`.
+2. **Advanced settings → Secrets**: add `GROQ_API_KEY = "your-key"`.
+3. Deploy. It rebuilds automatically on every push.
+
+> Why not Hugging Face Spaces? Gradio/Docker Spaces now need a paid PRO plan, and this project sticks to free tools.
 
 ### Run the tests
 
@@ -117,7 +107,7 @@ Messages aren't stored or logged. Before the text goes to Groq, long numbers (ca
 ## Credits
 
 - [Meta Llama 3.3](https://www.llama.com/) model, served by [Groq](https://groq.com)
-- [Gradio](https://gradio.app) UI framework, [Hugging Face Spaces](https://huggingface.co/spaces) hosting
+- [Streamlit](https://streamlit.io) UI framework and Community Cloud hosting
 - Scam patterns informed by public advice from [ScamShield (Singapore)](https://www.scamshield.gov.sg/)
 - Built with help from Claude Code (AI coding assistant). See [CONTRIBUTION.md](CONTRIBUTION.md)
 
