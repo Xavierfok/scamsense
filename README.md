@@ -51,7 +51,7 @@ The AI's answer is validated: unknown verdicts, non-numeric scores or malformed 
 
 ## Try it
 
-**Live demo:** _LIVE_URL_
+**Live demo:** https://scamsense-checker.streamlit.app
 
 ### Run it on your own computer
 

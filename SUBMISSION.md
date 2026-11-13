@@ -13,7 +13,7 @@ Scam messages like fake delivery fees, "your account is suspended" alerts, fake 
 **AI implementation:**
 ScamSense uses Meta's open-weight Llama 3.3 70B model through Groq's free API, with JSON mode for structured output. A Python rule engine runs first: it detects shortened or lookalike links, OTP/password requests, urgency, payment asks, impersonation and job-scam phrases. It works offline, passes its findings to the AI as hints, and acts as a safety floor so a message that tries to trick the AI ("this is not a scam") can't be marked safe. Personal numbers and email names are masked before text is sent to the AI. The model's answer is validated before display. UI built with Streamlit and hosted free on Streamlit Community Cloud.
 
-**Working application:** _LIVE_URL_
+**Working application:** https://scamsense-checker.streamlit.app
 **Source code:** https://github.com/Xavierfok/scamsense
 **Demo:** Screenshots in https://github.com/Xavierfok/scamsense/tree/main/screenshots
 **Contribution:** see CONTRIBUTION.md
